@@ -75,9 +75,15 @@ int main() {
 
     if (IsKeyPressed(KEY_ENTER) && state == Start) {
       state = Running;
+      score = 0;
+      for (int i = 0; i < max_asteroids; ++i)
+        is_asteroid_active[i] = false;
     }
     if (IsKeyPressed(KEY_R) && state == GameOver) {
       state = Running;
+      score = 0;
+      for (int i = 0; i < max_asteroids; ++i)
+        is_asteroid_active[i] = false;
     }
 
     if (IsKeyPressed(KEY_Q) && state == Running) {
@@ -124,8 +130,6 @@ int main() {
 
         // And checks if it's game over
         if (is_asteroid_active[i] && asteroids[i].pos.y > screenHeight) {
-          asteroids[i].pos.y = 0;
-          is_asteroid_active[i] = false;
           state = GameOver;
           break;
         }
@@ -144,11 +148,6 @@ int main() {
           }
         }
       }
-    }
-
-    if (state == GameOver) {
-      for (int i = 0; i < max_asteroids; ++i)
-        is_asteroid_active[i] = false;
     }
 
     BeginDrawing();
