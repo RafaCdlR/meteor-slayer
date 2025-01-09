@@ -73,17 +73,15 @@ int main() {
                                // presses the Close button on the window
   {
 
-    if (IsKeyPressed(KEY_ENTER) && state == Start) {
+    if ((IsKeyPressed(KEY_ENTER) && state == Start) ||
+        (IsKeyPressed(KEY_R) && state == GameOver)) {
       state = Running;
       score = 0;
       for (int i = 0; i < max_asteroids; ++i)
         is_asteroid_active[i] = false;
-    }
-    if (IsKeyPressed(KEY_R) && state == GameOver) {
-      state = Running;
-      score = 0;
-      for (int i = 0; i < max_asteroids; ++i)
-        is_asteroid_active[i] = false;
+      timer = 0.0;
+      interval = 1.0;
+      speed = 50.0;
     }
 
     if (IsKeyPressed(KEY_Q) && state == Running) {
